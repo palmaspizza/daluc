@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content='Da Luc — Ropa exclusiva con la mejor calidad. Descubre nuestra colección única.'>
+  <meta name="description" content='Da Luc — Productos exclusivos con la mejor calidad. Descubre nuestra colección única..'>
   <meta name="theme-color" content="#F9A8C9">
-  <title>Da Luc ✦ Ropa con Estilo</title>
-
+  <title>Da Luc ✦ Tienda Online </title>
+<link rel="icon" type="image/jpeg" href="daluclogo.jpeg">
+<link rel="apple-touch-icon" href="daluclogo.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -98,9 +99,11 @@
     .logo-hint { font-size:10px; color:var(--tx-l); text-align:center; font-weight:700; text-transform:uppercase; letter-spacing:1px; }
 
     .brand-name {
-      font-family:'Playfair Display',serif; font-size:1.75rem; font-weight:800;
-      color: var(--dk); letter-spacing: -0.5px;
-    }
+  font-family:'Playfair Display',serif; font-size:1.75rem; font-weight:800;
+  color: var(--dk); letter-spacing: -0.5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
     .site-nav { display:flex; gap:8px; margin-left:auto; }
     .site-nav a {
       font-size:.85rem; font-weight:600; color:var(--tx);
@@ -110,7 +113,7 @@
 
     /* CARRITO BTN */
     .cart-btn {
-      position:relative; background:var(--wh); border:1px solid var(--brd);
+      position:relative; background:var(--wh); border:1px solid var(--brd) !important;
       padding:10px; border-radius:12px;
       transition:all .2s;     color: #b26ce5;
       display: flex; align-items: center; justify-content: center;
@@ -149,7 +152,28 @@
     .mobile-menu.open { display:flex; }
     .mobile-menu a { font-size:1.2rem; font-weight:700; color:var(--dk); padding:12px 32px; border-radius:50px; text-align:center; }
     .mobile-menu a:hover { background:var(--pk-l); color:var(--pk-b); }
+/* grupo derecho header */
+    .header-right { display:flex; align-items:center; gap:10px; flex-shrink:0; }
 
+    /* =============================================
+       MOBILE HEADER ≤768px
+    ============================================= */
+    @media (max-width: 768px) {
+      .site-header { padding:0 14px; }
+      .header-inner { gap:10px; height:64px; }
+
+      /* nombre oculto en móvil, el logo lo representa */
+      .brand-name { display:none; }
+
+      /* nav desktop oculta */
+      .site-nav { display:none; }
+
+      /* buscador ocupa todo el espacio del medio */
+      .search-wrap { flex:1; max-width:none; min-width:0; }
+
+      /* hamburguesa visible */
+      .hamburger { display:flex; }
+    }
     /* =============================================
        HERO
     ============================================= */
@@ -202,8 +226,8 @@
     .hero-tags { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:30px; }
     .hero-tag {
       font-size:.72rem; font-weight:700; letter-spacing:1.5px;
-      text-transform:uppercase; color:var(--tx-l);
-      padding:5px 14px; border:1px solid var(--brd);
+      text-transform:uppercase; color:var(--pk-b);
+      padding:5px 14px; border:1px solid var(--pk-b);
       border-radius:50px; background:rgba(255,255,255,.5);
     }
 
@@ -909,6 +933,22 @@
     width: 36px;
     height: 36px;
   }
+  #logo-circle {
+  width:48px; height:48px; border-radius:1111px;
+  background:linear-gradient(135deg, var(--pk-l), var(--li-l));
+  border:1px solid var(--pk); flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  position:relative; overflow:hidden; user-select:none;
+  padding:0;
+}
+#logo-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  pointer-events: none;
+}
   .brand-name {
     font-size: 1.4rem;
     white-space: nowrap;
@@ -920,42 +960,985 @@
     padding: 8px;
   }
   .cart-btn .lucide {
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
   }
   .hamburger span {
     width: 18px;
   }
 }
-  </style>
+ /* CARRITO BTN */
+.cart-btn-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.cart-btn-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--pk), var(--li), var(--sky), var(--pk));
+  background-size: 300% 300%;
+  animation: cartGlow 2.5s linear infinite;
+  opacity: 0.75;
+  z-index: 0;
+}
+@keyframes cartGlow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.cart-btn {
+  position: relative; z-index: 1;
+  background: var(--wh); border: 2px solid transparent;
+  padding: clamp(8px, 1.2vw, 12px);
+  border-radius: 14px;
+  transition: all .25s;
+  color: #b26ce5;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 14px rgba(224,106,154,.18);
+}
+.cart-btn:hover { transform: translateY(-2px) scale(1.06); box-shadow: 0 8px 22px rgba(224,106,154,.35); } 
+
+/* grupo derecho header */
+    .header-right { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+
+    /* =============================================
+       MOBILE HEADER ≤768px
+    ============================================= */
+  @media (max-width: 1024px) {
+      .site-header { padding:0 14px; }
+      .header-inner { gap:8px; height:64px; }
+
+      .brand-name { display:none; }
+      .site-nav { display:none; }
+
+      .search-wrap {
+        display:flex !important;
+        flex:1;
+        max-width:none;
+        min-width:0;
+      }
+
+      .hamburger { display:flex; }
+    }
+/* ╔══════════════════════════════════════════════════════════╗
+   ║         DA LUC — PREMIUM STYLE & ANIMATIONS             ║
+   ╚══════════════════════════════════════════════════════════╝ */
+
+/* ─── KEYFRAMES GLOBALES ─────────────────────────────────── */
+
+@keyframes fadeInUp {
+  from { opacity:0; transform:translateY(32px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeInDown {
+  from { opacity:0; transform:translateY(-24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeInLeft {
+  from { opacity:0; transform:translateX(-40px); }
+  to   { opacity:1; transform:translateX(0); }
+}
+@keyframes fadeInRight {
+  from { opacity:0; transform:translateX(40px); }
+  to   { opacity:1; transform:translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity:0; transform:scale(.85); }
+  to   { opacity:1; transform:scale(1); }
+}
+@keyframes shimmer {
+  0%   { background-position:-600px 0; }
+  100% { background-position: 600px 0; }
+}
+@keyframes floatY {
+  0%,100% { transform:translateY(0); }
+  50%     { transform:translateY(-10px); }
+}
+@keyframes rotateSlow {
+  from { transform:rotate(0deg); }
+  to   { transform:rotate(360deg); }
+}
+@keyframes gradShift {
+  0%   { background-position:0% 50%; }
+  50%  { background-position:100% 50%; }
+  100% { background-position:0% 50%; }
+}
+@keyframes sparkle {
+  0%,100% { opacity:1; transform:scale(1) rotate(0deg); }
+  25%     { opacity:.6; transform:scale(1.3) rotate(15deg); }
+  75%     { opacity:.8; transform:scale(.8) rotate(-10deg); }
+}
+@keyframes borderGlow {
+  0%,100% { box-shadow:0 0 0 2px rgba(249,168,201,.3), 0 8px 30px rgba(249,168,201,.12); }
+  50%     { box-shadow:0 0 0 4px rgba(224,106,154,.5), 0 16px 50px rgba(224,106,154,.25); }
+}
+@keyframes ripple {
+  0%   { transform:scale(1); opacity:.6; }
+  100% { transform:scale(2.5); opacity:0; }
+}
+@keyframes slideInModal {
+  from { opacity:0; transform:translateY(40px) scale(.95); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+@keyframes textGradFlow {
+  0%   { background-position:0% center; }
+  100% { background-position:200% center; }
+}
+@keyframes heartbeat {
+  0%,100% { transform:scale(1); }
+  14%     { transform:scale(1.15); }
+  28%     { transform:scale(1); }
+  42%     { transform:scale(1.1); }
+  56%     { transform:scale(1); }
+}
+@keyframes glowPulse {
+  0%,100% { opacity:.4; }
+  50%     { opacity:1; }
+}
+@keyframes tickerFade {
+  0%,100% { opacity:1; }
+  50%     { opacity:.7; }
+}
+@keyframes cardReveal {
+  from { opacity:0; transform:translateY(24px) scale(.97); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+
+/* ─── HEADER PREMIUM ─────────────────────────────────────── */
+
+.site-header {
+  box-shadow: 0 2px 24px rgba(249,168,201,.13);
+  transition: box-shadow .3s, background .3s;
+}
+.site-header.scrolled {
+  background: rgba(255,255,255,.97) !important;
+  box-shadow: 0 4px 32px rgba(160,70,120,.14);
+}
+
+/* Logo — anillo giratorio suave */
+#logo-circle {
+  transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+}
+#logo-circle::after {
+  content:'';
+  position:absolute; inset:-3px;
+  border-radius:15px;
+  background: conic-gradient(var(--pk), var(--li), var(--sky), var(--pk));
+  animation: rotateSlow 4s linear infinite;
+  z-index:-1;
+  opacity:.55;
+}
+#logo-circle:hover {
+  transform: scale(1.08) rotate(-4deg);
+  box-shadow: 0 10px 30px rgba(249,168,201,.45);
+}
+
+/* Brand name — degradado animado */
+.brand-name {
+  background: linear-gradient(120deg, var(--dk) 0%, var(--pk-b) 40%, var(--li-d) 70%, var(--dk) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textGradFlow 4s linear infinite;
+}
+
+/* Nav links — subrayado animado */
+.site-nav a {
+  position: relative;
+  overflow: hidden;
+}
+.site-nav a::after {
+  content:'';
+  position:absolute; bottom:4px; left:50%;
+  width:0; height:2px;
+  background: linear-gradient(to right, var(--pk-b), var(--li-d));
+  border-radius:2px;
+  transition: width .3s ease, left .3s ease;
+}
+.site-nav a:hover::after {
+  width: 60%;
+  left: 20%;
+}
+
+/* Buscador — efecto glow al focus */
+.search-wrap input:focus {
+  box-shadow: 0 0 0 3px rgba(249,168,201,.25), 0 4px 16px rgba(249,168,201,.15);
+}
+
+/* Carrito — animación mejorada */
+.cart-btn-wrap::before {
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--pk), var(--li), var(--sky), var(--pk-b));
+  background-size: 300% 300%;
+  animation: gradShift 3s ease infinite;
+  opacity: .7;
+}
+.cart-btn {
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s !important;
+}
+.cart-btn:hover {
+  transform: scale(1.12) translateY(-2px) !important;
+}
+.cart-badge {
+  animation: heartbeat 1.4s ease infinite !important;
+}
+
+/* Hamburguesa — hover animado */
+.hamburger:hover span:nth-child(1) { transform: translateX(3px); }
+.hamburger:hover span:nth-child(2) { transform: scaleX(.7); }
+.hamburger:hover span:nth-child(3) { transform: translateX(-3px); }
+.hamburger span { transition: transform .25s ease; }
+
+/* ─── HERO PREMIUM ───────────────────────────────────────── */
+
+.hero {
+  background: linear-gradient(135deg, var(--pk-l) 0%, var(--yw) 45%, var(--sky-l) 100%);
+  background-size: 300% 300%;
+  animation: gradShift 10s ease infinite;
+}
+
+/* Orbes decorativos extra */
+.hero::before {
+  animation: floatY 7s ease-in-out infinite, glowPulse 4s ease-in-out infinite;
+  width:500px; height:500px;
+}
+.hero::after {
+  animation: floatY 9s ease-in-out infinite reverse, glowPulse 5s ease-in-out infinite;
+  width:380px; height:380px;
+}
+
+.hero-badge {
+  animation: fadeInDown .7s ease both, borderGlow 3s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+/* Shimmer en el badge */
+.hero-badge::after {
+  content:'';
+  position:absolute; top:0; left:-100%;
+  width:60%; height:100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+  animation: shimmer 2.5s ease infinite;
+}
+
+.hero-title {
+  animation: fadeInUp .8s .15s ease both;
+}
+.hero-title em {
+  background: linear-gradient(135deg, var(--pk-b), var(--li-d), #FF6A00);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textGradFlow 3s linear infinite;
+}
+
+.hero-sub   { animation: fadeInUp .8s .28s ease both; }
+.hero-btns  { animation: fadeInUp .8s .38s ease both; }
+.hero-tags  { animation: fadeInUp .8s .50s ease both; }
+
+.btn-hero-p {
+  position: relative;
+  overflow: hidden;
+  background-size: 200% auto;
+  animation: gradShift 4s ease infinite;
+}
+.btn-hero-p::before {
+  content:'';
+  position:absolute; inset:0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+  transform: translateX(-100%);
+  transition: transform .5s ease;
+}
+.btn-hero-p:hover::before { transform: translateX(100%); }
+.btn-hero-p:hover { transform: translateY(-4px) scale(1.03) !important; }
+
+.hero-tag {
+  transition: all .25s;
+  backdrop-filter: blur(8px);
+}
+.hero-tag:hover {
+  background: rgba(255,255,255,.85);
+  border-color: var(--pk);
+  color: var(--pk-b);
+  transform: translateY(-2px);
+}
+
+/* ─── TICKER PREMIUM ─────────────────────────────────────── */
+
+.ticker-wrap {
+  background: linear-gradient(135deg, var(--dk) 0%, #2D0B45 50%, var(--dk) 100%);
+  background-size: 200% auto;
+  animation: gradShift 8s ease infinite;
+  box-shadow: 0 4px 24px rgba(20,0,40,.2);
+}
+.t-item {
+  animation: tickerFade 3s ease-in-out infinite;
+  transition: color .2s;
+  letter-spacing:4px;
+}
+.t-sep {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* ─── TARJETAS DE PRODUCTO PREMIUM ───────────────────────── */
+
+.product-card {
+  animation: cardReveal .5s ease both;
+  border: 1px solid rgba(249,168,201,.15) !important;
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease !important;
+}
+/* stagger automático para las primeras 12 tarjetas */
+.product-card:nth-child(1)  { animation-delay:.05s }
+.product-card:nth-child(2)  { animation-delay:.1s }
+.product-card:nth-child(3)  { animation-delay:.15s }
+.product-card:nth-child(4)  { animation-delay:.2s }
+.product-card:nth-child(5)  { animation-delay:.25s }
+.product-card:nth-child(6)  { animation-delay:.3s }
+.product-card:nth-child(7)  { animation-delay:.35s }
+.product-card:nth-child(8)  { animation-delay:.4s }
+.product-card:nth-child(9)  { animation-delay:.45s }
+.product-card:nth-child(10) { animation-delay:.5s }
+.product-card:nth-child(11) { animation-delay:.55s }
+.product-card:nth-child(12) { animation-delay:.6s }
+
+.product-card:hover {
+  transform: translateY(-10px) scale(1.013) !important;
+  box-shadow: 0 24px 60px rgba(160,70,120,.18), 0 0 0 2px var(--pk-l) !important;
+}
+
+/* Overlay de color suave al hacer hover */
+.pcard-img-wrap::after {
+  content:'';
+  position:absolute; inset:0;
+  background: linear-gradient(to top, rgba(160,70,120,.15), transparent 60%);
+  opacity:0;
+  transition: opacity .35s ease;
+  z-index:1;
+}
+.product-card:hover .pcard-img-wrap::after { opacity:1; }
+
+.product-card:hover .pcard-img-wrap img {
+  transform: scale(1.09) !important;
+}
+
+.card-name {
+  transition: color .25s;
+}
+.product-card:hover .card-name { color: var(--pk-b); }
+
+.btn-add-cart-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--pk-b), var(--li-d)) !important;
+  background-size: 200% auto !important;
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s !important;
+}
+.btn-add-cart-card::before {
+  content:'';
+  position:absolute; inset:0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+  transform: translateX(-100%);
+  transition: transform .45s ease;
+}
+.btn-add-cart-card:hover::before { transform: translateX(100%); }
+.btn-add-cart-card:hover {
+  transform: translateY(-3px) scale(1.03) !important;
+  box-shadow: 0 12px 32px rgba(224,106,154,.4) !important;
+}
+
+/* ─── CATEGORÍAS PREMIUM ─────────────────────────────────── */
+
+.cat-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all .28s cubic-bezier(.34,1.56,.64,1) !important;
+}
+.cat-btn:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 8px 20px rgba(249,168,201,.25);
+}
+.cat-btn.active {
+  animation: borderGlow 2.5s ease-in-out infinite;
+  transform: translateY(-2px);
+}
+
+/* ─── SECTION TITLES PREMIUM ─────────────────────────────── */
+
+.section-title {
+  position: relative;
+  display: inline-block;
+}
+.section-line {
+  height: 4px !important;
+  background: linear-gradient(to right, var(--pk-b), var(--li), var(--sky)) !important;
+  background-size: 200% auto;
+  animation: gradShift 4s ease infinite;
+  border-radius: 4px !important;
+  width: 56px !important;
+}
+
+/* ─── FEATURES PREMIUM ───────────────────────────────────── */
+
+.feat-item {
+  position: relative;
+  overflow: hidden;
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s !important;
+}
+.feat-item::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0;
+  height:3px;
+  background: linear-gradient(to right, var(--pk), var(--li), var(--sky));
+  background-size:200% auto;
+  animation: gradShift 4s ease infinite;
+  opacity:0;
+  transition: opacity .3s;
+}
+.feat-item:hover::before { opacity:1; }
+.feat-item:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+  box-shadow: 0 20px 50px rgba(160,70,120,.14) !important;
+}
+.feat-icon {
+  display: inline-block;
+  animation: floatY 3s ease-in-out infinite;
+  transition: transform .3s;
+}
+.feat-item:nth-child(2) .feat-icon { animation-delay:.5s; }
+.feat-item:nth-child(3) .feat-icon { animation-delay:1s; }
+.feat-item:nth-child(4) .feat-icon { animation-delay:1.5s; }
+
+/* ─── PROMO BANNER PREMIUM ───────────────────────────────── */
+
+.promo-banner {
+  background: linear-gradient(135deg, var(--li-d) 0%, var(--pk-b) 50%, #FF6A00 100%);
+  background-size: 300% 300%;
+  animation: gradShift 7s ease infinite;
+  position: relative;
+}
+/* Burbujas decorativas */
+.promo-banner::before {
+  content:'';
+  position:absolute; top:-60px; right:-60px;
+  width:300px; height:300px; border-radius:50%;
+  background: radial-gradient(circle, rgba(255,255,255,.08), transparent 70%);
+  animation: floatY 8s ease-in-out infinite;
+}
+.promo-banner::after {
+  content:'';
+  position:absolute; bottom:-40px; left:-40px;
+  width:220px; height:220px; border-radius:50%;
+  background: radial-gradient(circle, rgba(255,255,255,.06), transparent 70%);
+  animation: floatY 10s ease-in-out infinite reverse;
+}
+.promo-label { animation: fadeInDown .7s ease both; }
+.promo-title { animation: fadeInUp .7s .12s ease both; }
+.promo-sub   { animation: fadeInUp .7s .22s ease both; }
+.btn-promo {
+  animation: fadeInUp .7s .32s ease both;
+  position: relative; overflow: hidden;
+}
+.btn-promo::before {
+  content:'';
+  position:absolute; inset:0;
+  background: linear-gradient(90deg, transparent, rgba(224,106,154,.15), transparent);
+  transform: translateX(-100%);
+  transition: transform .5s;
+}
+.btn-promo:hover::before  { transform: translateX(100%); }
+.btn-promo:hover { transform: translateY(-4px) scale(1.04) !important; }
+
+/* ─── ABOUT STRIP PREMIUM ────────────────────────────────── */
+
+.about-strip {
+  background: linear-gradient(135deg, var(--pk-xl) 0%, var(--li-l) 50%, var(--sky-l) 100%);
+  background-size: 300% 300%;
+  animation: gradShift 12s ease infinite;
+}
+.about-text h2 { animation: fadeInLeft .8s ease both; }
+.about-text p  { animation: fadeInLeft .8s .1s ease both; }
+
+.slogan-chip {
+  transition: all .3s cubic-bezier(.34,1.56,.64,1);
+  border-left: 3px solid transparent;
+}
+.slogan-chip:hover {
+  transform: translateX(6px) scale(1.02);
+  box-shadow: 0 10px 28px rgba(160,70,120,.12);
+  border-left-color: var(--pk);
+}
+.sc-icon { animation: floatY 4s ease-in-out infinite; }
+.about-slogans .slogan-chip:nth-child(2) .sc-icon { animation-delay:.8s; }
+.about-slogans .slogan-chip:nth-child(3) .sc-icon { animation-delay:1.6s; }
+
+/* ─── PICKUP POINTS PREMIUM ──────────────────────────────── */
+
+.pickup-point {
+  transition: all .3s cubic-bezier(.34,1.56,.64,1);
+  position: relative;
+  overflow: hidden;
+}
+.pickup-point::before {
+  content:'';
+  position:absolute; inset:0;
+  background: linear-gradient(135deg, var(--pk-l), var(--li-l));
+  opacity:0;
+  transition: opacity .3s;
+}
+.pickup-point:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 14px 36px rgba(160,70,120,.15);
+  border-color: var(--pk) !important;
+}
+.pickup-point:hover::before { opacity:1; }
+.pickup-point > * { position:relative; z-index:1; }
+
+/* ─── SCROLL TO TOP PREMIUM ──────────────────────────────── */
+
+.scroll-top-btn {
+  background: linear-gradient(135deg, var(--pk-b), var(--li-d)) !important;
+  background-size: 200% auto !important;
+  animation: gradShift 4s ease infinite;
+  border: 2px solid rgba(255,255,255,.25) !important;
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1), opacity .3s !important;
+}
+.scroll-top-btn.show {
+  animation: gradShift 4s ease infinite, scaleIn .35s ease;
+}
+.scroll-top-btn:hover {
+  transform: translateY(-5px) scale(1.12) !important;
+}
+
+/* ─── FOOTER PREMIUM ─────────────────────────────────────── */
+
+footer {
+  background: linear-gradient(160deg, var(--dk) 0%, #2D0B45 60%, #1A0B25 100%);
+  position: relative;
+  overflow: hidden;
+}
+footer::before {
+  content:'';
+  position:absolute; top:-100px; right:-100px;
+  width:400px; height:400px; border-radius:50%;
+  background: radial-gradient(circle, rgba(249,168,201,.05), transparent 70%);
+  animation: floatY 12s ease-in-out infinite;
+  pointer-events:none;
+}
+.footer-col ul li a {
+  position: relative;
+  display: inline-block;
+  transition: color .2s, transform .2s !important;
+}
+.footer-col ul li a:hover {
+  color: var(--pk) !important;
+  transform: translateX(4px);
+}
+
+/* ─── MODALES PREMIUM ────────────────────────────────────── */
+
+.modal-box {
+  animation: slideInModal .32s cubic-bezier(.34,1.56,.64,1) both !important;
+}
+.modal-ov {
+  backdrop-filter: blur(16px) saturate(140%);
+}
+
+/* ─── TOAST / NOTIFICACIONES ─────────────────────────────── */
+
+#toast-container > div,
+.toast, [id*="toast"] {
+  animation: fadeInRight .4s cubic-bezier(.34,1.56,.64,1) both !important;
+  border-left: 4px solid var(--pk) !important;
+  box-shadow: 0 12px 36px rgba(160,70,120,.2) !important;
+}
+
+/* ─── ADMIN PANEL PREMIUM ────────────────────────────────── */
+
+.ap-box { animation: slideInModal .35s cubic-bezier(.34,1.56,.64,1) both; }
+.admin-tab {
+  position: relative;
+  transition: color .2s, background .2s !important;
+}
+.admin-tab::after {
+  content:'';
+  position:absolute; bottom:-2px; left:0;
+  width:0; height:3px;
+  background: linear-gradient(to right, var(--pk-b), var(--li-d));
+  border-radius:2px;
+  transition: width .3s ease;
+}
+.admin-tab:hover::after  { width:100%; }
+.admin-tab.active::after { width:100%; }
+#admin-prod-list .aprow {
+  transition: all .25s cubic-bezier(.34,1.56,.64,1) !important;
+}
+#admin-prod-list .aprow:hover {
+  transform: translateX(4px) scale(1.005);
+  box-shadow: 0 4px 18px rgba(160,70,120,.1);
+}
+
+/* ─── FORM CONTROLS PREMIUM ──────────────────────────────── */
+
+.form-ctrl {
+  transition: border-color .25s, box-shadow .25s !important;
+}
+.form-ctrl:focus {
+  box-shadow: 0 0 0 3px rgba(249,168,201,.2), 0 4px 14px rgba(249,168,201,.1) !important;
+}
+.btn-primary {
+  position: relative; overflow: hidden;
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s !important;
+}
+.btn-primary::before {
+  content:'';
+  position:absolute; inset:0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+  transform: translateX(-100%);
+  transition: transform .5s;
+}
+.btn-primary:hover::before { transform: translateX(100%); }
+.btn-primary:hover { transform: translateY(-3px) scale(1.02) !important; }
+
+/* ─── MOBILE MENU PREMIUM ────────────────────────────────── */
+
+.mobile-menu {
+  background: linear-gradient(160deg, rgba(255,246,251,.98) 0%, rgba(244,238,255,.98) 100%) !important;
+  backdrop-filter: blur(20px) !important;
+}
+.mobile-menu a {
+  position: relative;
+  transition: all .25s cubic-bezier(.34,1.56,.64,1) !important;
+  border: 1px solid transparent;
+}
+.mobile-menu a:hover {
+  background: linear-gradient(135deg, var(--pk-l), var(--li-l)) !important;
+  border-color: var(--pk);
+  transform: scale(1.04);
+}
+
+/* ─── RESPONSIVE — sin romper nada ───────────────────────── */
+
+@media (max-width: 768px) {
+  .hero::before,
+  .hero::after { width:220px; height:220px; }
+  .promo-banner::before { width:180px; height:180px; }
+  .product-card:hover {
+    transform: translateY(-5px) scale(1.01) !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+  }
+}
+/* ─── CONSENTIMIENTO PRIVACIDAD ─────────────────────────── */
+.privacy-consent-wrap {
+  background: var(--pk-xl);
+  border: 1.5px solid var(--pk);
+  border-radius: var(--r);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+.privacy-consent-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+.privacy-consent-label input[type="checkbox"] {
+  width: 18px; height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  accent-color: var(--pk-b);
+  cursor: pointer;
+}
+.privacy-consent-text {
+  font-size: .82rem;
+  color: var(--tx);
+  line-height: 1.55;
+}
+.privacy-link {
+  color: var(--pk-b);
+  font-weight: 700;
+  text-decoration: underline;
+}
+.privacy-link:hover { color: var(--li-d); }
+.privacy-consent-error {
+  font-size: .78rem;
+  color: #E53935;
+  margin-top: 8px;
+  font-weight: 600;
+}
+.privacy-consent-wrap.error-border {
+  border-color: #E53935;
+  background: #FFF8F8;
+}
+
+/* ─── MODAL POLÍTICA DE PRIVACIDAD ───────────────────────── */
+#modal-privacy {
+  display: none; position: fixed; inset: 0;
+  background: rgba(20,0,40,.82); backdrop-filter: blur(12px);
+  z-index: 900; overflow-y: auto; padding: 20px 16px;
+}
+#modal-privacy.active { display: flex; align-items: flex-start; justify-content: center; }
+.privacy-box {
+  background: #fff; border-radius: var(--rx);
+  max-width: 720px; width: 100%;
+  box-shadow: 0 32px 90px rgba(160,70,120,.38);
+  animation: slideInModal .32s cubic-bezier(.34,1.56,.64,1) both;
+  margin: 20px 0;
+}
+.privacy-header {
+  background: linear-gradient(135deg, var(--dk), var(--li-d));
+  padding: 22px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-radius: var(--rx) var(--rx) 0 0;
+}
+.privacy-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; color: #fff; font-weight: 700;
+}
+.privacy-body {
+  padding: 32px 28px;
+  max-height: 70vh;
+  overflow-y: auto;
+  font-size: .88rem;
+  color: var(--tx);
+  line-height: 1.75;
+}
+.privacy-body h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem; color: var(--dk);
+  margin: 24px 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--pk-l);
+}
+.privacy-body h3:first-child { margin-top: 0; }
+.privacy-body p { margin-bottom: 10px; }
+.privacy-body ul {
+  margin: 8px 0 10px 20px;
+}
+.privacy-body ul li { margin-bottom: 5px; }
+.privacy-body strong { color: var(--dk); font-weight: 700; }
+.privacy-body .privacy-date {
+  font-size: .76rem; color: var(--tx-l);
+  text-align: right; margin-top: 24px;
+  font-style: italic;
+}
+.privacy-footer {
+  padding: 16px 28px 24px;
+  text-align: center;
+}
+.btn-close-privacy {
+  background: linear-gradient(135deg, var(--pk-b), var(--li-d));
+  color: #fff; border: none;
+  padding: 12px 36px; border-radius: 50px;
+  font-size: .92rem; font-weight: 800;
+  transition: all .3s;
+  box-shadow: 0 6px 22px rgba(224,106,154,.25);
+}
+.btn-close-privacy:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(224,106,154,.35); }
+/* ─── MODAL TÉRMINOS Y CONDICIONES ──────────────────────── */
+#modal-terms {
+  display: none; position: fixed; inset: 0;
+  background: rgba(20,0,40,.82); backdrop-filter: blur(12px);
+  z-index: 900; overflow-y: auto; padding: 20px 16px;
+}
+#modal-terms.active { display: flex; align-items: flex-start; justify-content: center; }
+.terms-box {
+  background: #fff; border-radius: var(--rx);
+  max-width: 720px; width: 100%;
+  box-shadow: 0 32px 90px rgba(160,70,120,.38);
+  animation: slideInModal .32s cubic-bezier(.34,1.56,.64,1) both;
+  margin: 20px 0;
+}
+.terms-header {
+  background: linear-gradient(135deg, var(--li-d), var(--pk-b));
+  padding: 22px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-radius: var(--rx) var(--rx) 0 0;
+}
+.terms-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; color: #fff; font-weight: 700;
+}
+.terms-body {
+  padding: 32px 28px;
+  max-height: 70vh;
+  overflow-y: auto;
+  font-size: .88rem;
+  color: var(--tx);
+  line-height: 1.75;
+}
+.terms-body h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem; color: var(--dk);
+  margin: 24px 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--li-l);
+}
+.terms-body h3:first-child { margin-top: 0; }
+.terms-body p { margin-bottom: 10px; }
+.terms-body ul { margin: 8px 0 10px 20px; }
+.terms-body ul li { margin-bottom: 5px; }
+.terms-body strong { color: var(--dk); font-weight: 700; }
+.terms-body .terms-date {
+  font-size: .76rem; color: var(--tx-l);
+  text-align: right; margin-top: 24px;
+  font-style: italic;
+}
+.terms-footer {
+  padding: 16px 28px 24px;
+  text-align: center;
+}
+.btn-close-terms {
+  background: linear-gradient(135deg, var(--li-d), var(--pk-b));
+  color: #fff; border: none;
+  padding: 12px 36px; border-radius: 50px;
+  font-size: .92rem; font-weight: 800;
+  transition: all .3s;
+  box-shadow: 0 6px 22px rgba(155,109,197,.25);
+}
+.btn-close-terms:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(155,109,197,.35); }
+/* ─── CANTIDAD EN CARRITO ────────────────────────────────── */
+.ci-qty-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+.ci-qty-btn {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--brd);
+  background: #fff;
+  color: var(--dk);
+  font-size: 1rem;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.ci-qty-btn:hover { border-color: var(--pk); color: var(--pk-b); }
+.ci-qty-btn:disabled { opacity: .3; cursor: not-allowed; }
+.ci-qty-num {
+  font-weight: 800;
+  font-size: 1rem;
+  min-width: 22px;
+  text-align: center;
+  color: var(--dk);
+}
+.ci-qty-btn:disabled { opacity: .3; cursor: not-allowed; }
+.ci-qty-num {
+  font-weight: 800;
+  font-size: 1rem;
+  min-width: 22px;
+  text-align: center;
+  color: var(--dk);
+}
+
+/* ─── INVENTARIO: SUB-TABS ───────────────────────────────── */
+.inv-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.inv-tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 22px;
+  border-radius: 50px;
+  border: 2px solid var(--brd);
+  background: var(--wh);
+  color: var(--tx);
+  font-size: .82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .22s;
+  font-family: 'Inter', sans-serif;
+}
+.inv-tab:hover {
+  border-color: var(--pk);
+  color: var(--pk-b);
+  background: var(--pk-l);
+}
+.inv-tab.active {
+  background: linear-gradient(135deg, var(--pk), var(--li));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(200,100,160,.22);
+}
+.inv-tab-icon { font-size: 1rem; }
+
+/* ─── ETIQUETA POCO STOCK ────────────────────────────────── */
+.badge-low-stock {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: linear-gradient(135deg, #FF6A00, #FF3CAC);
+  color: #fff;
+  font-size: .65rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 50px;
+  animation: pulseBadge 1.8s ease-in-out infinite;
+  box-shadow: 0 3px 10px rgba(255,106,0,.35);
+  margin-left: 6px;
+  vertical-align: middle;
+}
+</style>
+
 </head>
 <body>
 
 <!-- ==================== HEADER ==================== -->
+<!-- ==================== HEADER ==================== -->
 <header class="site-header">
   <div class="header-inner">
-    <div id="logo-circle">
-      <i data-lucide="shield-check" class="lucide-lg" style="color:var(--pk-b)"></i>
+
+    <div id="logo-circle" onclick="scrollToSection('hero')">
+      <img src="daluclogo.jpeg" alt="Da Luc Logo">
     </div>
+
     <span class="brand-name">Da Luc</span>
+
     <nav class="site-nav">
       <a href="#" onclick="scrollToSection('products-section')">Colección</a>
       <a href="#" onclick="scrollToSection('cats-section')">Categorías</a>
       <a href="#" onclick="scrollToSection('features-section')">Nosotros</a>
       <a href="#" onclick="scrollToSection('pickup-section')">Retiro</a>
     </nav>
+
     <div class="search-wrap">
       <i data-lucide="search" class="search-icon"></i>
       <input type="text" id="search-input" placeholder="Buscar productos..." oninput="handleSearch()">
     </div>
-    <!-- CARRITO -->
-    <button class="cart-btn" onclick="openCart()" aria-label="Carrito">
-      <i data-lucide="shopping-cart"></i>
-      <span class="cart-badge" id="cart-badge" style="display:none">0</span>
-    </button>
-    <button class="hamburger" onclick="toggleMenu()" aria-label="Menú">
-      <span></span><span></span><span></span>
-    </button>
+
+    <div class="header-right">
+      <div class="cart-btn-wrap">
+        <button class="cart-btn" onclick="openCart()" aria-label="Carrito">
+          <i data-lucide="shopping-cart"></i>
+          <span class="cart-badge" id="cart-badge" style="display:none">0</span>
+        </button>
+      </div>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
   </div>
 </header>
 
@@ -968,12 +1951,13 @@
   <a href="#" onclick="openCart();toggleMenu()">Carrito</a>
 </div>
 
+
 <!-- ==================== HERO ==================== -->
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-badge">NUEVA COLECCIÓN</div>
     <h1 class="hero-title">Calidad que<br><em>te define</em></h1>
-    <p class="hero-sub">Prendas exclusivas seleccionadas con los más altos estándares.<br>Diseñadas para quienes buscan distinción y calidad superior.</p>
+    <p class="hero-sub">Productos exclusivos seleccionados para ti<br>Diseñadas para quienes buscan distinción y calidad superior.</p>
     <div class="hero-btns">
       <button class="btn-hero-p" onclick="scrollToSection('products-section')">Ver Colección</button>
       <button class="btn-hero-s" onclick="scrollToSection('cats-section')">Explorar Categorías</button>
@@ -1064,7 +2048,7 @@
       <div class="empty-state">
         <div class="ei"><i data-lucide="shopping-bag" class="lucide" style="width:64px;height:64px;color:var(--pk)"></i></div>
         <h3>Cargando colección...</h3>
-        <p>Estamos trayendo las mejores prendas para ti.</p>
+        <p>Estamos trayendo lo mejor para ti.</p>
       </div>
     </div>
     <div class="load-more-wrap" id="load-more-wrap" style="display:none;">
@@ -1091,7 +2075,7 @@
     <div class="feat-item anim">
       <div class="feat-icon"><i data-lucide="sparkles" class="lucide-lg" style="color:var(--pk-b)"></i></div>
       <h3 class="feat-title">Calidad Superior</h3>
-      <p class="feat-desc">Seleccionamos cada prenda con los más altos estándares de calidad.</p>
+      <p class="feat-desc">Seleccionamos cada producto para ti y prendas de calidad.</p>
     </div>
     <div class="feat-item anim">
       <div class="feat-icon"><i data-lucide="truck" class="lucide-lg" style="color:var(--pk-b)"></i></div>
@@ -1101,11 +2085,11 @@
     <div class="feat-item anim">
       <div class="feat-icon"><i data-lucide="diamond" class="lucide-lg" style="color:var(--pk-b)"></i></div>
       <h3 class="feat-title">Exclusividad</h3>
-      <p class="feat-desc">Diseños distintivos que aportan un valor único a tu guardarropa.</p>
+      <p class="feat-desc">Diseños distintivos que aportan un valor único a tu estilo.</p>
     </div>
     <div class="feat-item anim">
       <div class="feat-icon"><i data-lucide="message-circle" class="lucide-lg" style="color:var(--pk-b)"></i></div>
-      <h3 class="feat-title">Asesoría Profesional</h3>
+      <h3 class="feat-title">Asesoría </h3>
       <p class="feat-desc">Nuestro equipo especializado te brinda atención personalizada vía WhatsApp.</p>
     </div>
     <div class="feat-item anim">
@@ -1120,14 +2104,14 @@
 <section class="about-strip">
   <div class="about-inner section-wrap">
     <div class="about-text anim">
-      <h2>Ropa con <em>distinción</em></h2>
-      <p>En Da Luc entendemos la ropa como una extensión de tu personalidad. Cada pieza de nuestra colección es el resultado de una búsqueda rigurosa de calidad y diseño.</p>
+      <h2>Estilo con <em>distinción</em></h2>
+      <p>En Da Luc entendemos cada artículo como una extensión de tu personalidad. Cada pieza de nuestra colección es el resultado de una búsqueda rigurosa de calidad y diseño.</p>
       <p>Nuestra misión es proporcionar una experiencia de lujo accesible, combinando tendencias contemporáneas con una confección impecable.</p>
     </div>
     <div class="about-slogans anim">
       <div class="slogan-chip"><i data-lucide="crown" class="lucide-lg" style="color:var(--pk-b)"></i><div><div class="sc-text">Calidad Pura</div><div class="sc-sub">Materiales de acabados finos</div></div></div>
       <div class="slogan-chip"><i data-lucide="star" class="lucide-lg" style="color:var(--pk-b)"></i><div><div class="sc-text">Estilo Distintivo</div><div class="sc-sub">Diseños pensados para destacar</div></div></div>
-      <div class="slogan-chip"><i data-lucide="zap" class="lucide-lg" style="color:var(--pk-b)"></i><div><div class="sc-text">Vanguardia</div><div class="sc-sub"></div></div></div>
+      <div class="slogan-chip"><i data-lucide="zap" class="lucide-lg" style="color:var(--pk-b)"></i><div><div class="sc-text">Accesorios</div><div class="sc-sub">Y màs...</div><div class="sc-sub"></div></div></div>
     </div>
   </div>
 </section>
@@ -1138,7 +2122,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <h3>Da Luc</h3>
-        <p>Ropa exclusiva con estándares de calidad y diseños únicos.</p>
+        <p>Productos exclusivos con estándares de calidad y diseños únicos.</p>
         <p style="margin-bottom:14px;color:rgba(255,255,255,.4);font-size:.7rem;letter-spacing:1px;text-transform:uppercase;">Sucursales de Retiro</p>
         <p style="font-size:.78rem;color:rgba(255,255,255,.55);line-height:2;">
           <i data-lucide="map-pin" class="lucide-sm" style="display:inline-block;vertical-align:middle;margin-right:8px"></i> Olga Norte 1313<br>
@@ -1156,10 +2140,13 @@
       </div>
 
 
-    <div class="footer-bottom">
-      <p>© 2025 Da Luc. Excelencia en Moda.</p>
+<div class="footer-bottom">
+      <p>© 2025 Da Luc. Calidad y Estilo.</p>
+      <div style="display:flex; gap:20px; flex-wrap:wrap;">
+        <a href="#" onclick="openTermsModal(); return false;">Términos y Condiciones</a>
+        <a href="#" onclick="openPrivacyModal(); return false;">Política de Privacidad</a>
+      </div>
     </div>
-  </div>
 </footer>
 
 <!-- SCROLL TO TOP -->
@@ -1232,13 +2219,13 @@
             <input type="number" id="prod-precio" class="form-ctrl" placeholder="0.00" min="0" step="any" required>
           </div>
           <div class="form-group">
-            <label>Precio Promocional</label>
+            <label>Precio Promocional (Si es que hay)</label>
             <input type="number" id="prod-oferta" class="form-ctrl" placeholder="Opcional" min="0" step="any">
           </div>
         </div>
         <div class="form-row2">
           <div class="form-group">
-            <label>Género</label>
+            <label>Dirigido a</label>
             <select id="prod-genero" class="form-ctrl">
               <option value="">-- No especificado --</option>
               <option value="Mujer">Mujer</option>
@@ -1249,8 +2236,8 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Composición / Material</label>
-            <input type="text" id="prod-material" class="form-ctrl" placeholder="Ej: Algodón, Seda...">
+            <label>Detalles / Material</label>
+            <input type="text" id="prod-material" class="form-ctrl" placeholder="Ej: Algodón, Metal, Plástico...">
           </div>
         </div>
         <div class="form-group">
@@ -1301,10 +2288,24 @@
       </form>
     </div>
 
-    <!-- PANE: MIS PRODUCTOS -->
+  <!-- PANE: MIS PRODUCTOS -->
     <div class="admin-pane" id="pane-productos">
       <div class="pane-title"><i data-lucide="package" class="lucide-sm"></i> Gestión de Inventario</div>
       <div id="admin-prod-msg" class="form-msg admin-prod-msg"></div>
+
+      <!-- Sub-tabs de inventario -->
+      <div class="inv-tabs">
+        <button class="inv-tab active" id="inv-tab-agotados" onclick="switchInvTab('agotados')">
+          <span class="inv-tab-icon">🚫</span> Agotados
+        </button>
+        <button class="inv-tab" id="inv-tab-disponibles" onclick="switchInvTab('disponibles')">
+          <span class="inv-tab-icon">✅</span> Disponibles
+        </button>
+        <button class="inv-tab" id="inv-tab-todos" onclick="switchInvTab('todos')">
+          <span class="inv-tab-icon">📦</span> Todos
+        </button>
+      </div>
+
       <div id="admin-prod-list"><p class="empty-msg">Sincronizando productos...</p></div>
     </div>
 
@@ -1416,6 +2417,24 @@
 
       <div id="checkout-req" class="checkout-req"><i data-lucide="alert-circle" class="lucide-sm"></i> Por favor completa todos los campos obligatorios.</div>
 
+      <!-- CONSENTIMIENTO LEGAL — OBLIGATORIO -->
+    <!-- CONSENTIMIENTO LEGAL — OBLIGATORIO -->
+      <div class="privacy-consent-wrap" id="privacy-consent-wrap">
+        <label class="privacy-consent-label">
+          <input type="checkbox" id="privacy-consent-check">
+          <span class="privacy-consent-text">
+            He leído y acepto los
+            <a href="#" onclick="openTermsModal(); return false;" class="privacy-link">Términos y Condiciones</a>
+            y la
+            <a href="#" onclick="openPrivacyModal(); return false;" class="privacy-link">Política de Privacidad</a>.
+            Autorizo el tratamiento de mis datos personales para procesar este pedido.
+          </span>
+        </label>
+        <p class="privacy-consent-error" id="privacy-consent-error" style="display:none;">
+          ⚠️ Debes aceptar la Política de Privacidad para continuar.
+        </p>
+      </div>
+
       <button class="btn-confirm-order" onclick="confirmOrder()">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Confirmar por WhatsApp
@@ -1423,7 +2442,186 @@
     </div>
   </div>
 </div>
+<!-- ==================== MODAL: TÉRMINOS Y CONDICIONES ==================== -->
+<div id="modal-terms">
+  <div class="terms-box">
+    <div class="terms-header">
+      <h2>📋 Términos y Condiciones — Da Luc</h2>
+      <button class="modal-close-x" onclick="closeTermsModal()" style="background:rgba(255,255,255,.2);color:#fff;"><i data-lucide="x"></i></button>
+    </div>
+    <div class="terms-body">
 
+      <h3>1. Aceptación de los Términos</h3>
+      <p>Al utilizar este sitio web y realizar un pedido a través de él, usted declara haber leído, comprendido y aceptado en su totalidad los presentes Términos y Condiciones. Si no está de acuerdo con alguno de ellos, le rogamos que no realice compras a través de esta plataforma.</p>
+      <p>Estos términos se aplican a todas las transacciones realizadas a través del sitio web de <strong>Da Luc</strong>.</p>
+
+      <h3>2. Sobre Da Luc y el Proceso de Compra</h3>
+      <p>Da Luc es una tienda online que comercializa productos (incluyendo ropa, accesorios y artículos de temporada) mediante un sistema de pedidos por WhatsApp.</p>
+      <p>El proceso de compra funciona de la siguiente manera:</p>
+      <ul>
+        <li>El cliente selecciona productos y completa el formulario de pedido en el sitio web.</li>
+        <li>Al confirmar, el pedido se envía como mensaje de WhatsApp al número de Da Luc.</li>
+        <li><strong>El contrato de compraventa se perfecciona únicamente cuando Da Luc confirma el pedido por WhatsApp</strong>, validando disponibilidad de stock y condiciones de entrega.</li>
+        <li>Hasta recibir esa confirmación, el pedido se considera en proceso y no constituye un compromiso de venta definitivo.</li>
+      </ul>
+
+      <h3>3. Precios y Moneda</h3>
+      <ul>
+        <li>Todos los precios publicados en el sitio están expresados en <strong>pesos chilenos (CLP)</strong> e incluyen IVA cuando corresponda.</li>
+        <li>Da Luc se reserva el derecho de modificar los precios en cualquier momento sin previo aviso. Las modificaciones no afectarán pedidos ya confirmados.</li>
+        <li>En caso de error evidente en el precio publicado (por ejemplo, un precio notoriamente inferior al de mercado), Da Luc se reserva el derecho de anular el pedido y notificar al cliente antes de proceder.</li>
+        <li>Los precios de delivery pueden variar según la dirección de entrega y se informarán al cliente durante la confirmación por WhatsApp.</li>
+      </ul>
+
+      <h3>4. Stock y Disponibilidad</h3>
+      <ul>
+        <li>El stock mostrado en el sitio web es en tiempo real y se descuenta automáticamente al confirmar el pedido.</li>
+        <li>En casos excepcionales de pedidos simultáneos, puede producirse una discrepancia de stock. En ese caso, Da Luc contactará al cliente para ofrecer un producto alternativo o el reembolso íntegro del monto pagado.</li>
+        <li>La publicación de un producto en el sitio no garantiza su disponibilidad en todo momento.</li>
+      </ul>
+
+      <h3>5. Formas de Pago</h3>
+      <p>Da Luc acepta las siguientes formas de pago, que se coordinan directamente por WhatsApp:</p>
+      <ul>
+        <li><strong>Efectivo:</strong> se paga al momento del retiro o al recibir el delivery.</li>
+        <li><strong>Transferencia bancaria:</strong> el cliente debe realizar la transferencia antes del despacho o retiro. El pedido se confirma una vez acreditado el pago.</li>
+        <li><strong>Tarjeta:</strong> se coordina la modalidad de pago directamente con Da Luc por WhatsApp.</li>
+      </ul>
+      <p>Da Luc no almacena ni procesa datos bancarios o de tarjetas de crédito/débito a través de este sitio web.</p>
+
+      <h3>6. Entrega y Despacho</h3>
+      <p><strong>Retiro en local:</strong></p>
+      <ul>
+        <li>El cliente puede retirar su pedido en cualquiera de las sucursales indicadas en el sitio.</li>
+        <li>El pedido estará disponible para retiro una vez confirmado por Da Luc vía WhatsApp.</li>
+        <li>El pedido se reservará por un plazo máximo de <strong>48 horas hábiles</strong> desde la confirmación. Transcurrido ese plazo sin retiro, Da Luc podrá anular el pedido y reponer el stock, sin perjuicio de gestionar el reagendamiento con el cliente.</li>
+      </ul>
+      <p><strong>Delivery:</strong></p>
+      <ul>
+        <li>El servicio de delivery se coordina directamente vía WhatsApp. Los plazos de entrega son estimados y pueden variar por factores externos (tráfico, clima, zonas alejadas).</li>
+        <li>Da Luc no se responsabiliza por demoras ocasionadas por el servicio de transporte externo una vez que el pedido haya sido entregado al transportista.</li>
+        <li>Es responsabilidad del cliente proporcionar una dirección completa y correcta. En caso de dirección errónea, el costo de un segundo intento de entrega será asumido por el cliente.</li>
+      </ul>
+
+      <h3>7. Política de Cambios y Devoluciones</h3>
+      <p>Da Luc garantiza la calidad de sus productos. En cumplimiento con la <strong>Ley N° 19.496 de Protección al Consumidor (Chile)</strong>:</p>
+      <ul>
+        <li>El cliente tiene derecho a solicitar la devolución, cambio o reparación del producto dentro de los <strong>3 meses</strong> siguientes a la recepción, si este presenta fallas o defectos de fabricación.</li>
+        <li>Para solicitar un cambio o devolución, el cliente debe contactar a Da Luc por WhatsApp, indicando el pedido, el motivo y adjuntando fotografías del producto si corresponde.</li>
+        <li>Los productos deben estar en su estado original, sin uso, con etiquetas y en el empaque original para ser elegibles para cambio (excepto en casos de falla de fábrica).</li>
+        <li>Los cambios por gusto (talla, color) están sujetos a disponibilidad de stock y deben solicitarse dentro de las <strong>24 horas</strong> siguientes a la recepción del producto.</li>
+        <li>El costo del envío de devolución es responsabilidad del cliente, excepto cuando el motivo sea un defecto de fábrica o error de Da Luc en el despacho.</li>
+      </ul>
+
+      <h3>8. Descripción e Imágenes de Productos</h3>
+      <ul>
+        <li>Da Luc procura que las imágenes y descripciones de los productos sean lo más precisas posible.</li>
+        <li>Los colores y tonalidades de los productos pueden variar levemente respecto a las imágenes mostradas en el sitio, debido a diferencias en la calibración de pantallas.</li>
+        <li>En caso de discrepancia significativa entre el producto recibido y el publicado, el cliente tiene derecho a solicitar el cambio o devolución según lo establecido en la cláusula 7.</li>
+      </ul>
+
+      <h3>9. Responsabilidad</h3>
+      <ul>
+        <li>Da Luc no se responsabiliza por daños indirectos, pérdidas de datos ni perjuicios derivados del uso o imposibilidad de uso del sitio web.</li>
+        <li>Da Luc no garantiza la disponibilidad ininterrumpida del sitio web y puede realizar mantenimientos sin previo aviso.</li>
+        <li>Da Luc no es responsable por el contenido de sitios web de terceros enlazados desde esta plataforma (como WhatsApp o redes sociales).</li>
+      </ul>
+
+      <h3>10. Propiedad Intelectual</h3>
+      <p>Todos los contenidos publicados en este sitio web (nombre, logotipo, imágenes, textos, diseño) son propiedad de Da Luc o están utilizados bajo licencia. Queda prohibida su reproducción total o parcial sin autorización expresa y por escrito de Da Luc.</p>
+
+      <h3>11. Menores de Edad</h3>
+      <p>Las compras realizadas a través de este sitio por personas menores de 18 años deben contar con la autorización expresa de su padre, madre o tutor legal. Da Luc no asume responsabilidad por compras realizadas por menores sin dicha autorización.</p>
+
+      <h3>12. Modificaciones a los Términos</h3>
+      <p>Da Luc se reserva el derecho de modificar estos Términos y Condiciones en cualquier momento. Los cambios entrarán en vigor desde su publicación en este sitio. Se recomienda revisar periódicamente este documento. El uso continuado del sitio tras la publicación de cambios implica su aceptación.</p>
+
+      <h3>13. Legislación Aplicable y Resolución de Conflictos</h3>
+      <p>Estos Términos y Condiciones se rigen por las leyes de la República de Chile, en particular la <strong>Ley N° 19.496 sobre Protección de los Derechos de los Consumidores</strong> y la <strong>Ley N° 19.628 sobre Protección de la Vida Privada</strong>.</p>
+      <p>Cualquier controversia que surja en relación con estos términos será sometida en primera instancia a negociación directa entre las partes. De no llegarse a acuerdo, el consumidor podrá recurrir al <strong>SERNAC</strong> (Servicio Nacional del Consumidor) o a los tribunales competentes de la República de Chile.</p>
+
+      <h3>14. Contacto</h3>
+      <p>Para cualquier consulta, reclamo o sugerencia relacionada con estos Términos y Condiciones, puede contactarnos a través del número de WhatsApp disponible en este sitio.</p>
+
+      <p class="terms-date">Última actualización: Junio 2025</p>
+    </div>
+    <div class="terms-footer">
+      <button class="btn-close-terms" onclick="closeTermsModal()">Entendido, cerrar</button>
+    </div>
+  </div>
+</div>
+<!-- ==================== MODAL: POLÍTICA DE PRIVACIDAD ==================== -->
+<div id="modal-privacy">
+  <div class="privacy-box">
+    <div class="privacy-header">
+      <h2>📄 Política de Privacidad — Da Luc</h2>
+      <button class="modal-close-x" onclick="closePrivacyModal()" style="background:rgba(255,255,255,.2);color:#fff;"><i data-lucide="x"></i></button>
+    </div>
+    <div class="privacy-body">
+
+      <h3>1. Identificación del Responsable</h3>
+      <p><strong>Da Luc</strong> es responsable del tratamiento de los datos personales que se recopilan a través de este sitio web. Para consultas sobre privacidad, puede contactarnos al número de WhatsApp disponible en esta plataforma.</p>
+
+      <h3>2. Datos Personales que Recopilamos</h3>
+      <p>Al realizar un pedido a través de este sitio, recopilamos los siguientes datos:</p>
+      <ul>
+        <li><strong>Nombre y apellido</strong> del comprador.</li>
+        <li><strong>Dirección de entrega</strong> (en caso de optar por delivery).</li>
+        <li><strong>Información del pedido:</strong> productos seleccionados, tallas, colores, cantidades y precios.</li>
+        <li><strong>Forma de pago</strong> seleccionada (efectivo, tarjeta o transferencia).</li>
+        <li><strong>Punto de retiro</strong> preferido (en caso de retiro en local).</li>
+      </ul>
+      <p>Este sitio <strong>no recopila</strong> datos bancarios, números de tarjeta, RUT ni contraseñas. El pago se coordina directamente entre el cliente y Da Luc.</p>
+
+      <h3>3. Finalidad del Tratamiento</h3>
+      <p>Sus datos personales son utilizados exclusivamente para:</p>
+      <ul>
+        <li>Procesar y coordinar su pedido a través de WhatsApp.</li>
+        <li>Confirmar la disponibilidad de stock y coordinar la entrega o el retiro.</li>
+        <li>Contactarle en caso de inconvenientes con el pedido.</li>
+      </ul>
+      <p>Sus datos <strong>no serán utilizados</strong> con fines publicitarios sin su consentimiento expreso adicional, ni serán vendidos ni cedidos a terceros.</p>
+
+      <h3>4. Transmisión de Datos a WhatsApp</h3>
+      <p>Al confirmar su pedido, la información ingresada (nombre, apellido, productos, dirección y forma de pago) será enviada al número de WhatsApp de Da Luc a través de la plataforma WhatsApp (Meta Platforms, Inc.). Este proceso se realiza en su propio dispositivo y aplicación. Da Luc no almacena estos datos en servidores propios; la comunicación queda registrada únicamente en la conversación de WhatsApp.</p>
+      <p>Al utilizar WhatsApp, usted acepta también las <a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener" style="color:var(--pk-b);text-decoration:underline;">Políticas de Privacidad de WhatsApp (Meta)</a>.</p>
+
+      <h3>5. Base Legal del Tratamiento</h3>
+      <p>El tratamiento de sus datos se basa en:</p>
+      <ul>
+        <li><strong>Su consentimiento expreso</strong>, otorgado al aceptar esta política antes de confirmar el pedido.</li>
+        <li><strong>La ejecución del contrato de compraventa</strong>, ya que el tratamiento es necesario para procesar y entregar su pedido.</li>
+      </ul>
+      <p>Fundamento normativo: <strong>Ley N° 19.628 sobre Protección de la Vida Privada</strong> (Chile) y sus modificaciones.</p>
+
+      <h3>6. Almacenamiento y Seguridad</h3>
+      <p>El catálogo de productos y stock se almacena en <strong>Firebase Realtime Database</strong> (Google LLC), bajo las condiciones de seguridad de Google Cloud. Las imágenes de productos se alojan en <strong>Cloudinary</strong>. Ninguno de estos servicios almacena datos personales de los compradores.</p>
+      <p>Da Luc no almacena su nombre, dirección ni información de pedido en ninguna base de datos propia. Toda la información del pedido fluye directamente hacia WhatsApp.</p>
+
+      <h3>7. Conservación de los Datos</h3>
+      <p>Los datos del pedido quedan almacenados únicamente en la conversación de WhatsApp entre usted y Da Luc. Da Luc puede conservar el historial de conversaciones por el tiempo que sea necesario para gestionar garantías, devoluciones o consultas posventa, y no más de <strong>2 años</strong> desde la fecha del pedido, salvo obligación legal diferente.</p>
+
+      <h3>8. Derechos del Titular de los Datos</h3>
+      <p>Conforme a la Ley N° 19.628, usted tiene derecho a:</p>
+      <ul>
+        <li><strong>Acceder</strong> a sus datos personales tratados por Da Luc.</li>
+        <li><strong>Rectificar</strong> datos inexactos o incompletos.</li>
+        <li><strong>Cancelar o eliminar</strong> sus datos cuando ya no sean necesarios para la finalidad que motivó su recopilación.</li>
+        <li><strong>Oponerse</strong> al tratamiento de sus datos en los casos previstos por la ley.</li>
+      </ul>
+      <p>Para ejercer estos derechos, puede contactarnos directamente por WhatsApp indicando su solicitud.</p>
+
+      <h3>9. Menores de Edad</h3>
+      <p>Este sitio no está dirigido a menores de 14 años. Si usted tiene menos de 14 años, necesita la autorización de su padre, madre o tutor legal para realizar una compra. Da Luc no recopila intencionalmente datos de menores de edad sin supervisión adulta.</p>
+
+      <h3>10. Cookies y Tecnologías de Seguimiento</h3>
+      <p>Este sitio web puede utilizar tecnologías de seguimiento propias de los servicios de terceros integrados (Firebase de Google, Cloudinary). Estos servicios pueden recopilar datos de uso anónimos para el correcto funcionamiento de la plataforma. No utilizamos cookies propias de seguimiento publicitario.</p>
+
+      <h3>11. Cambios en esta Política</h3>
+      <p>Da Luc se reserva el derecho de modificar esta Política de Privacidad en cualquier momento. Los cambios serán publicados en esta misma página con la fecha de actualización. El uso continuado del sitio tras la publicación de cambios implica la aceptación de la nueva política.</p>
+
+      <h3>12. Contacto</h3>
+      <p>Para cualquier consulta, solicitud o reclamo relacionado con el tratamiento de sus datos personales, puede cont
 <!-- ==================== MODAL: EDITAR PRODUCTO ==================== -->
 <div id="modal-edit-product">
   <div class="ep-box" style="margin:20px auto;">
@@ -1468,7 +2666,7 @@
         </div>
         <div class="form-row2">
           <div class="form-group">
-            <label>Género</label>
+            <label>Dirigido a</label>
             <select id="edit-genero" class="form-ctrl">
               <option value="">-- No especificado --</option>
               <option value="Mujer">Mujer</option>
@@ -1479,7 +2677,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Composición / Material</label>
+            <label>Detalles / Material</label>
             <input type="text" id="edit-material" class="form-ctrl">
           </div>
         </div>
@@ -1608,7 +2806,14 @@ function setupLongPress() {
   logo.addEventListener('touchend', end);
   logo.addEventListener('touchcancel', end);
 }
-
+function updateCopyrightYear() {
+  const currentYear = new Date().getFullYear();
+  const footerParrafo = document.querySelector('.footer-bottom p');
+  if (footerParrafo) {
+    footerParrafo.innerHTML = footerParrafo.innerHTML.replace(/\b\d{4}\b/, currentYear);
+  }
+}
+document.addEventListener('DOMContentLoaded', updateCopyrightYear);
 /* ================================================
    MODALS
 ================================================ */
@@ -2065,7 +3270,7 @@ function removeFromCart(itemId) {
 function renderCartBody() {
   const body = document.getElementById('cart-body');
   if (!cart.length) {
-    body.innerHTML = `<div class="cart-empty"><div class="cei"><i data-lucide="shopping-cart" class="lucide" style="width:64px;height:64px;color:var(--pk)"></i></div><h3>Tu carrito está vacío</h3><p>Explora nuestra colección y agrega tus prendas favoritas.</p></div>`;
+    body.innerHTML = `<div class="cart-empty"><div class="cei"><i data-lucide="shopping-cart" class="lucide" style="width:64px;height:64px;color:var(--pk)"></i></div><h3>Tu carrito está vacío</h3><p>Explora nuestra colección y agrega tus favoritos.</p></div>`;
     lucide.createIcons();
     return;
   }
@@ -2077,7 +3282,7 @@ function renderCartBody() {
       ${cart.map(item => `
         <div class="cart-item">
           <div class="ci-img">
-            ${item.imagen ? `<img src="${escHtml(item.imagen)}" alt="${escHtml(item.nombre)}" loading="lazy">` : '<i data-lucide="shirt"></i>'}
+            ${item.imagen ? `<img src="${escHtml(item.imagen)}" alt="${escHtml(item.nombre)}" loading="lazy">` : '<i data-lucide="shopping-bag"></i>'}
           </div>
           <div class="ci-info">
             <div class="ci-name">${escHtml(item.nombre)}</div>
@@ -2086,9 +3291,10 @@ function renderCartBody() {
               ${item.talla && item.color ? ' · ' : ''}
               ${item.color ? `Color: ${escHtml(item.color)}` : ''}
             </div>
-            <div class="ci-qty-wrap">
-              <span class="ci-qty-label">Cantidad:</span>
-              <span class="ci-qty-val">${item.cantidad}</span>
+            <div class="ci-qty-selector">
+              <button class="ci-qty-btn" onclick="changeCartQty(${item.id}, -1)" ${item.cantidad <= 1 ? 'disabled' : ''}>−</button>
+              <span class="ci-qty-num">${item.cantidad}</span>
+              <button class="ci-qty-btn" onclick="changeCartQty(${item.id}, 1)">+</button>
             </div>
             <div class="ci-price">$${fmtNum(item.precio * item.cantidad)}</div>
           </div>
@@ -2100,8 +3306,19 @@ function renderCartBody() {
       <span class="cart-total-val">$${fmtNum(total)}</span>
     </div>
     <button class="btn-checkout" onclick="openCheckout()">Finalizar compra</button>`;
-  
+
   lucide.createIcons();
+}
+
+function changeCartQty(itemId, delta) {
+  const idx = cart.findIndex(i => i.id === itemId);
+  if (idx === -1) return;
+  cart[idx].cantidad += delta;
+  if (cart[idx].cantidad <= 0) {
+    cart.splice(idx, 1);
+  }
+  updateCartBadge();
+  renderCartBody();
 }
 
 /* ================================================
@@ -2336,19 +3553,63 @@ function resetProductForm() {
 /* ================================================
    ADMIN PRODUCTS LIST (con Editar + Eliminar)
 ================================================ */
+/* ── tab activo en inventario (agotados por defecto) ── */
+let currentInvTab = 'agotados';
+
+function switchInvTab(tab) {
+  currentInvTab = tab;
+  document.querySelectorAll('.inv-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('inv-tab-' + tab).classList.add('active');
+  renderAdminProducts();
+}
+
 function renderAdminProducts() {
   const container = document.getElementById('admin-prod-list');
   if (!allProducts.length) { container.innerHTML = '<p class="empty-msg">No hay productos aún.</p>'; return; }
-  container.innerHTML = allProducts.map(p => {
-    const hasOffer = p.precioOferta && parseFloat(p.precioOferta) > 0;
+
+  /* filtrar según el sub-tab activo */
+  let lista = [...allProducts];
+  if (currentInvTab === 'agotados') {
+    lista = lista.filter(p => (p.stock || 0) === 0);
+  } else if (currentInvTab === 'disponibles') {
+    lista = lista.filter(p => (p.stock || 0) > 0);
+    /* ordenar de menor a mayor stock */
+    lista.sort((a, b) => (a.stock || 0) - (b.stock || 0));
+  }
+  /* 'todos' no filtra ni ordena, deja el orden original */
+
+  if (!lista.length) {
+    const msgs = {
+      agotados:    '🎉 ¡No hay productos agotados!',
+      disponibles: 'No hay productos con stock disponible.',
+      todos:       'No hay productos aún.'
+    };
+    container.innerHTML = `<p class="empty-msg">${msgs[currentInvTab]}</p>`;
+    return;
+  }
+
+  container.innerHTML = lista.map(p => {
+    const hasOffer  = p.precioOferta && parseFloat(p.precioOferta) > 0;
+    const stock     = p.stock || 0;
+    const isOut     = stock === 0;
+    const lowStock  = !isOut && stock < 7;
+
     return `<div class="aprow">
       <div class="aprow-img">
-        ${p.imagen ? `<img src="${escHtml(optimizeCloudinaryUrl(p.imagen))}" alt="${escHtml(p.nombre)}" loading="lazy" onerror="this.parentElement.innerHTML='<i data-lucide=\'shirt\'></i>'">` : '<i data-lucide="shirt"></i>'}
+        ${p.imagen
+          ? `<img src="${escHtml(optimizeCloudinaryUrl(p.imagen))}" alt="${escHtml(p.nombre)}" loading="lazy" onerror="this.parentElement.innerHTML='<i data-lucide=\'shirt\'></i>'">`
+          : '<i data-lucide="shirt"></i>'}
       </div>
       <div class="aprow-info">
-        <strong>${escHtml(p.nombre)}</strong>
+        <strong>
+          ${escHtml(p.nombre)}
+          ${lowStock ? `<span class="badge-low-stock">⚡ Poco stock</span>` : ''}
+        </strong>
         <span class="aprow-cat">${p.categoria ? escHtml(p.categoria) : 'Sin categoría'}</span>
         <span class="aprow-price">$${fmtNum(p.precio)}${hasOffer ? ` → $${fmtNum(p.precioOferta)}` : ''}</span>
+        <span style="font-size:.75rem;font-weight:700;color:${isOut ? '#E53935' : lowStock ? '#FF6A00' : '#2E7D32'};">
+          ${isOut ? '🚫 Agotado' : `Stock: ${stock} unidades`}
+        </span>
       </div>
       <div class="aprow-actions">
         <button class="btn-edit" onclick="openEditModal('${p.id}')">Editar</button>
@@ -2615,6 +3876,15 @@ window.addEventListener('DOMContentLoaded', () => {
     if (e.target === this) closeEditModal();
   });
 });
+/* ================================================
+   MODAL: POLÍTICA DE PRIVACIDAD
+================================================ */
+function openPrivacyModal() {
+  document.getElementById('modal-privacy').classList.add('active');
+}
+function closePrivacyModal() {
+  document.getElementById('modal-privacy').classList.remove('active');
+}
 </script>
 </body>
 </html>
