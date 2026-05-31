@@ -2257,14 +2257,21 @@ footer::before {
             <input type="checkbox" class="size-cb" id="s-36" value="36"><label class="size-lbl" for="s-36">36</label>
             <input type="checkbox" class="size-cb" id="s-38" value="38"><label class="size-lbl" for="s-38">38</label>
             <input type="checkbox" class="size-cb" id="s-40" value="40"><label class="size-lbl" for="s-40">40</label>
-              <input type="checkbox" class="size-cb" id="s-unico" value="Único"><label class="size-lbl" for="s-unico">ACCESORIO | SIN TALLA</label>
-              <input type="checkbox" class="size-cb" id="s-pequeno" value="Pequeño"><label class="size-lbl" for="s-pequeno">Pequeño</label>
-              <input type="checkbox" class="size-cb" id="s-mediano" value="Mediano"><label class="size-lbl" for="s-mediano">Mediano</label>
-              <input type="checkbox" class="size-cb" id="s-grande" value="Grande"><label class="size-lbl" for="s-grande">Grande</label>
+  
               <span id="custom-sizes-create"></span>
               <button type="button" class="size-lbl" style="cursor:pointer;background:transparent;border-style:dashed;" onclick="addCustomSize('create')">+ Añadir</button>
-            </div>
-        </div><br><br> <br><br><br><br> <br><br>
+         <br><br>            <input type="checkbox" class="size-cb" id="s-unico" value="Único"><label class="size-lbl" for="s-unico">ACCESORIO | SIN TALLA</label>
+   </div>
+        </div><br><br> <br><br><br>
+      <div class="form-group">
+          <h3>TAMAÑOS:</h3>
+          </div> <input type="checkbox" class="size-cb" id="es-pequeno" value="Pequeño"><label class="size-lbl" for="es-pequeno">Pequeño</label>
+            <input type="checkbox" class="size-cb" id="es-mediano" value="Mediano"><label class="size-lbl" for="es-mediano">Mediano</label>
+            <input type="checkbox" class="size-cb" id="es-grande" value="Grande"><label class="size-lbl" for="es-grande">Grande</label>
+            <span id="custom-sizes-edit"></span>
+            <button type="button" class="size-lbl" style="cursor:pointer;background:transparent;border-style:dashed;" onclick="addCustomSize('edit')">+ Añadir</button>
+          </div>
+     
         <div class="form-group">
           <label>Variantes de Color</label>
           <div class="color-add-wrap">
@@ -2712,16 +2719,16 @@ footer::before {
            <input type="checkbox" class="size-cb" id="es-40" value="40"><label class="size-lbl" for="es-40">40</label>
              
         </div><br><br><br>
-      
-        </div>
-   <div class="form-group">
-           <label>TAMAÑOS</label>
+      <div class="form-group">
+          <label>TAMAÑOS:</label>
           </div> <input type="checkbox" class="size-cb" id="es-pequeno" value="Pequeño"><label class="size-lbl" for="es-pequeno">Pequeño</label>
             <input type="checkbox" class="size-cb" id="es-mediano" value="Mediano"><label class="size-lbl" for="es-mediano">Mediano</label>
             <input type="checkbox" class="size-cb" id="es-grande" value="Grande"><label class="size-lbl" for="es-grande">Grande</label>
             <span id="custom-sizes-edit"></span>
             <button type="button" class="size-lbl" style="cursor:pointer;background:transparent;border-style:dashed;" onclick="addCustomSize('edit')">+ Añadir</button>
-          </div>     <div class="form-group">
+          </div>
+        </div>
+        <div class="form-group">
           <label>Variantes de Color</label>
           <div class="color-add-wrap">
             <input type="color" id="edit-color-hex" value="#F9A8C9">
@@ -3112,7 +3119,7 @@ function openProductDetail(id) {
       ${p.descripcion ? `<p class="pd-desc">${escHtml(p.descripcion)}</p>` : ''}
  ${hasSizes && !(p.tallas.length === 1 && p.tallas[0] === 'Único') ? `
         <div class="pd-block">
-          <h4>Elige tu talla</h4>
+          <h4>Elige tu talla o tamaño</h4>
           <div class="pd-sizes" id="pd-sizes-list">
             ${p.tallas.map(t=>`<span class="pd-size" onclick="selectDetailSize(this,'${escHtml(t)}')">${escHtml(t)}</span>`).join('')}
           </div>
