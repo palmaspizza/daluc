@@ -532,6 +532,12 @@
     ============================================= */
     .admin-prod-msg { margin-bottom:10px; }
     #admin-prod-list .aprow { display:grid; grid-template-columns:58px 1fr auto; gap:12px; align-items:center; padding:12px 14px; border:1px solid var(--brd); border-radius:var(--rs); margin-bottom:9px; background:var(--bg); transition:border-color .2s; }
+    @media (max-width: 600px) {
+  #admin-prod-list .aprow { grid-template-columns: 46px 1fr; gap:8px; }
+  .aprow-actions { grid-column: 1 / -1; display:flex; gap:6px; justify-content:flex-end; }
+  .ap-box { margin: 10px !important; }
+  .admin-pane { padding: 16px 14px; }
+}
     #admin-prod-list .aprow:hover { border-color:var(--pk); }
     .aprow-img { width:58px; height:58px; object-fit:cover; border-radius:var(--rs); background:var(--li-l); display:flex; align-items:center; justify-content:center; font-size:1.5rem; overflow:hidden; }
     .aprow-img img { width:100%; height:100%; object-fit:cover; }
@@ -1584,7 +1590,12 @@ footer::before {
   transform: translateX(4px) scale(1.005);
   box-shadow: 0 4px 18px rgba(160,70,120,.1);
 }
-
+@media (max-width: 600px) {
+  #admin-prod-list .aprow { grid-template-columns: 46px 1fr; gap:8px; }
+  .aprow-actions { grid-column: 1 / -1; display:flex; gap:6px; justify-content:flex-end; }
+  .ap-box { margin: 10px !important; }
+  .admin-pane { padding: 16px 14px; }
+}
 /* ─── FORM CONTROLS PREMIUM ──────────────────────────────── */
 
 .form-ctrl {
@@ -2262,15 +2273,17 @@ footer::before {
               <button type="button" class="size-lbl" style="cursor:pointer;background:transparent;border-style:dashed;" onclick="addCustomSize('create')">+ Añadir</button>
          <br><br>            <input type="checkbox" class="size-cb" id="s-unico" value="Único"><label class="size-lbl" for="s-unico">ACCESORIO | SIN TALLA</label>
    </div>
-        </div><br><br> <br><br><br>
+        </div>
       <div class="form-group">
-          <h3>TAMAÑOS:</h3>
-          </div> <input type="checkbox" class="size-cb" id="es-pequeno" value="Pequeño"><label class="size-lbl" for="es-pequeno">Pequeño</label>
-            <input type="checkbox" class="size-cb" id="es-mediano" value="Mediano"><label class="size-lbl" for="es-mediano">Mediano</label>
-            <input type="checkbox" class="size-cb" id="es-grande" value="Grande"><label class="size-lbl" for="es-grande">Grande</label>
-            <span id="custom-sizes-edit"></span>
-            <button type="button" class="size-lbl" style="cursor:pointer;background:transparent;border-style:dashed;" onclick="addCustomSize('edit')">+ Añadir</button>
+          <label>Tamaños</label>
+          <div class="sizes-wrap">
+            <input type="checkbox" class="size-cb" id="s-pequeno" value="Pequeño"><label class="size-lbl" for="s-pequeno">Pequeño</label>
+            <input type="checkbox" class="size-cb" id="s-mediano" value="Mediano"><label class="size-lbl" for="s-mediano">Mediano</label>
+            <input type="checkbox" class="size-cb" id="s-grande" value="Grande"><label class="size-lbl" for="s-grande">Grande</label>
+            <span id="custom-sizes-create2"></span>
+            <button type="button" class="size-lbl" style="cursor:pointer;background:transparent;border-style:dashed;" onclick="addCustomSize('create')">+ Añadir</button>
           </div>
+        </div>
      
         <div class="form-group">
           <label>Variantes de Color</label>
@@ -2718,16 +2731,14 @@ footer::before {
             <input type="checkbox" class="size-cb" id="es-38" value="38"><label class="size-lbl" for="es-38">38</label>
            <input type="checkbox" class="size-cb" id="es-40" value="40"><label class="size-lbl" for="es-40">40</label>
              
-        </div><br><br><br>
+       </div><br><br>
       <div class="form-group">
-          <label>TAMAÑOS:</label>
-          </div> <input type="checkbox" class="size-cb" id="es-pequeno" value="Pequeño"><label class="size-lbl" for="es-pequeno">Pequeño</label>
+          <h3>TAMAÑOS:</h3>
+          <input type="checkbox" class="size-cb" id="es-pequeno" value="Pequeño"><label class="size-lbl" for="es-pequeno">Pequeño</label>
             <input type="checkbox" class="size-cb" id="es-mediano" value="Mediano"><label class="size-lbl" for="es-mediano">Mediano</label>
             <input type="checkbox" class="size-cb" id="es-grande" value="Grande"><label class="size-lbl" for="es-grande">Grande</label>
             <span id="custom-sizes-edit"></span>
-            <button type="button" class="size-lbl" style="cursor:pointer;background:transparent;border-style:dashed;" onclick="addCustomSize('edit')">+ Añadir</button>
-          </div>
-        </div>
+           <button type="button" class="size-lbl" style="cursor:pointer;background:transparent;border-style:dashed;" onclick="addCustomSize('create')">+ Añadir</button>
         <div class="form-group">
           <label>Variantes de Color</label>
           <div class="color-add-wrap">
