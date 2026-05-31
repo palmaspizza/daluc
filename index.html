@@ -468,8 +468,8 @@
        MODAL: ADMIN PANEL
     ============================================= */
     #modal-admin-panel { display:none; position:fixed; inset:0; background:rgba(20,0,40,.88); backdrop-filter:blur(10px); z-index:500; overflow-y:auto; padding:20px; }
-    #modal-admin-panel.active { display:block; }
-    .ap-box { background:#fff; border-radius:var(--rx); max-width:900px; margin:0 auto; min-height:80vh; overflow:hidden; box-shadow:0 24px 80px rgba(160,70,120,.35); animation:modalPop .28s ease; }
+    #modal-admin-panel.active { display:block; z-index:500; }
+    .ap-box { background:#fff; border-radius:var(--rx); max-width:900px; margin:0 auto; min-height:80vh; overflow: visible; box-shadow:0 24px 80px rgba(160,70,120,.35); animation:modalPop .28s ease; }
     .ap-header { background:linear-gradient(135deg, var(--dk), var(--li-d)); padding:20px 28px; display:flex; align-items:center; justify-content:space-between; }
     .ap-header-left { display:flex; align-items:center; gap:12px; }
     .ap-header h2 { font-family:'Playfair Display',serif; font-size:1.25rem; color:#fff; }
@@ -795,17 +795,18 @@
     /* =============================================
        MODAL: EDITAR PRODUCTO
     ============================================= */
-    #modal-edit-product {
-      display:none; position:fixed; inset:0;
-      background:rgba(20,0,40,.88); backdrop-filter:blur(10px);
-      z-index:800; overflow-y:auto; padding:20px;
-    }
-    #modal-edit-product.active { display:block; }
-    .ep-box { background:#fff; border-radius:var(--rx); max-width:860px; margin:0 auto; overflow:hidden; box-shadow:0 24px 80px rgba(160,70,120,.38); animation:modalPop .28s ease; }
-    .ep-header { background:linear-gradient(135deg, var(--li-d), var(--pk-b)); padding:20px 28px; display:flex; align-items:center; justify-content:space-between; }
-    .ep-header h2 { font-family:'Playfair Display',serif; font-size:1.2rem; color:#fff; }
-    .ep-body { padding:28px; }
-
+#modal-edit-product {
+  display:none; position:fixed; inset:0;
+  background:rgba(20,0,40,.88); backdrop-filter:blur(10px);
+  z-index:800; overflow-y:auto; overflow-x:hidden; padding:20px;
+  -webkit-overflow-scrolling: touch;
+}
+#modal-edit-product.active { display:flex; align-items:flex-start; justify-content:center; }
+.ep-box { background:#fff; border-radius:var(--rx); max-width:860px; width:100%; margin:20px auto; overflow:visible; box-shadow:0 24px 80px rgba(160,70,120,.38); animation:modalPop .28s ease; flex-shrink:0; }
+.ep-header { background:linear-gradient(135deg, var(--li-d), var(--pk-b)); padding:20px 28px; display:flex; align-items:center; justify-content:space-between; }
+.ep-header h2 { font-family:'Playfair Display',serif; font-size:1.2rem; color:#fff; }
+.ep-body { padding:28px; }
+.ep-body .form-ctrl { pointer-events:auto !important; user-select:text !important; -webkit-user-select:text !important; }
     /* =============================================
        ANIMATIONS
     ============================================= */
@@ -2239,9 +2240,9 @@ footer::before {
             <label>Detalles / Material</label>
             <input type="text" id="prod-material" class="form-ctrl" placeholder="Ej: Algodón, Metal, Plástico...">
           </div>
-        </div>
-        <div class="form-group">
-          <label>Tallas Disponibles</label>
+        </div><br><br> <br><br><br><br> <br><br>
+   <div class="form-group">
+          <label>Tallas de ropa</label>
           <div class="sizes-wrap">
             <input type="checkbox" class="size-cb" id="s-xs" value="XS"><label class="size-lbl" for="s-xs">XS</label>
             <input type="checkbox" class="size-cb" id="s-s" value="S"><label class="size-lbl" for="s-s">S</label>
@@ -2250,14 +2251,20 @@ footer::before {
             <input type="checkbox" class="size-cb" id="s-xl" value="XL"><label class="size-lbl" for="s-xl">XL</label>
             <input type="checkbox" class="size-cb" id="s-xxl" value="XXL"><label class="size-lbl" for="s-xxl">XXL</label>
             <input type="checkbox" class="size-cb" id="s-xxxl" value="XXXL"><label class="size-lbl" for="s-xxxl">XXXL</label>
-            <input type="checkbox" class="size-cb" id="s-unico" value="Único"><label class="size-lbl" for="s-unico">Único</label>
-            <input type="checkbox" class="size-cb" id="s-32" value="32"><label class="size-lbl" for="s-32">32</label>
+     
+         <input type="checkbox" class="size-cb" id="s-32" value="32"><label class="size-lbl" for="s-32">32</label>
             <input type="checkbox" class="size-cb" id="s-34" value="34"><label class="size-lbl" for="s-34">34</label>
             <input type="checkbox" class="size-cb" id="s-36" value="36"><label class="size-lbl" for="s-36">36</label>
             <input type="checkbox" class="size-cb" id="s-38" value="38"><label class="size-lbl" for="s-38">38</label>
             <input type="checkbox" class="size-cb" id="s-40" value="40"><label class="size-lbl" for="s-40">40</label>
-          </div>
-        </div>
+              <input type="checkbox" class="size-cb" id="s-unico" value="Único"><label class="size-lbl" for="s-unico">ACCESORIO | SIN TALLA</label>
+              <input type="checkbox" class="size-cb" id="s-pequeno" value="Pequeño"><label class="size-lbl" for="s-pequeno">Pequeño</label>
+              <input type="checkbox" class="size-cb" id="s-mediano" value="Mediano"><label class="size-lbl" for="s-mediano">Mediano</label>
+              <input type="checkbox" class="size-cb" id="s-grande" value="Grande"><label class="size-lbl" for="s-grande">Grande</label>
+              <span id="custom-sizes-create"></span>
+              <button type="button" class="size-lbl" style="cursor:pointer;background:transparent;border-style:dashed;" onclick="addCustomSize('create')">+ Añadir</button>
+            </div>
+        </div><br><br> <br><br><br><br> <br><br>
         <div class="form-group">
           <label>Variantes de Color</label>
           <div class="color-add-wrap">
@@ -2621,10 +2628,16 @@ footer::before {
       <p>Da Luc se reserva el derecho de modificar esta Política de Privacidad en cualquier momento. Los cambios serán publicados en esta misma página con la fecha de actualización. El uso continuado del sitio tras la publicación de cambios implica la aceptación de la nueva política.</p>
 
       <h3>12. Contacto</h3>
-      <p>Para cualquier consulta, solicitud o reclamo relacionado con el tratamiento de sus datos personales, puede cont
+<p>Para cualquier consulta, solicitud o reclamo relacionado con el tratamiento de sus datos personales, puede contactarnos directamente por WhatsApp.</p>
+    </div>
+    <div class="privacy-footer">
+      <button class="btn-close-privacy" onclick="closePrivacyModal()">Entendido</button>
+    </div>
+  </div>
+</div>
 <!-- ==================== MODAL: EDITAR PRODUCTO ==================== -->
 <div id="modal-edit-product">
-  <div class="ep-box" style="margin:20px auto;">
+  <div class="ep-box">
     <div class="ep-header">
       <h2 style="display:flex;align-items:center;gap:10px;"><i data-lucide="edit-3"></i> Editar Producto</h2>
       <button class="modal-close-x" onclick="closeEditModal()" style="background:rgba(255,255,255,.2);color:#fff;"><i data-lucide="x"></i></button>
@@ -2696,10 +2709,19 @@ footer::before {
             <input type="checkbox" class="size-cb" id="es-34" value="34"><label class="size-lbl" for="es-34">34</label>
             <input type="checkbox" class="size-cb" id="es-36" value="36"><label class="size-lbl" for="es-36">36</label>
             <input type="checkbox" class="size-cb" id="es-38" value="38"><label class="size-lbl" for="es-38">38</label>
-            <input type="checkbox" class="size-cb" id="es-40" value="40"><label class="size-lbl" for="es-40">40</label>
-          </div>
+           <input type="checkbox" class="size-cb" id="es-40" value="40"><label class="size-lbl" for="es-40">40</label>
+             
+        </div><br><br><br>
+      
         </div>
-        <div class="form-group">
+   <div class="form-group">
+           <label>TAMAÑOS</label>
+          </div> <input type="checkbox" class="size-cb" id="es-pequeno" value="Pequeño"><label class="size-lbl" for="es-pequeno">Pequeño</label>
+            <input type="checkbox" class="size-cb" id="es-mediano" value="Mediano"><label class="size-lbl" for="es-mediano">Mediano</label>
+            <input type="checkbox" class="size-cb" id="es-grande" value="Grande"><label class="size-lbl" for="es-grande">Grande</label>
+            <span id="custom-sizes-edit"></span>
+            <button type="button" class="size-lbl" style="cursor:pointer;background:transparent;border-style:dashed;" onclick="addCustomSize('edit')">+ Añadir</button>
+          </div>     <div class="form-group">
           <label>Variantes de Color</label>
           <div class="color-add-wrap">
             <input type="color" id="edit-color-hex" value="#F9A8C9">
@@ -2938,7 +2960,9 @@ function loadProducts() {
   db.ref('productos').on('value', snap => {
     allProducts = [];
     snap.forEach(child => {
-      allProducts.push({ id: child.key, ...child.val() });
+      const val = child.val();
+delete val.id;
+allProducts.push({ id: child.key, ...val });
     });
     allProducts.sort((a, b) => (b.fechaCreacion||0) - (a.fechaCreacion||0));
     
@@ -3051,6 +3075,11 @@ function openProductDetail(id) {
   currentDetailProductId = id;
   selectedSize  = null;
   selectedColor = null;
+
+  // Auto-seleccionar si solo hay 1 color
+  if (p.colores && p.colores.length === 1) {
+    selectedColor = p.colores[0].nombre;
+  }
   currentDetailQty = 1;
 
   const hasOffer  = p.precioOferta && parseFloat(p.precioOferta) > 0;
@@ -3081,7 +3110,7 @@ function openProductDetail(id) {
         ` : `<div class="dp-reg">$${fmtNum(p.precio)}</div>`}
       </div>
       ${p.descripcion ? `<p class="pd-desc">${escHtml(p.descripcion)}</p>` : ''}
-      ${hasSizes ? `
+ ${hasSizes && !(p.tallas.length === 1 && p.tallas[0] === 'Único') ? `
         <div class="pd-block">
           <h4>Elige tu talla</h4>
           <div class="pd-sizes" id="pd-sizes-list">
@@ -3092,11 +3121,11 @@ function openProductDetail(id) {
         <div class="pd-block">
           <h4>Elige un color</h4>
           <div class="pd-colors-list" id="pd-colors-list">
-            ${p.colores.map((c,i)=>`
-              <div class="pd-color-item" onclick="selectDetailColor(this,'${escHtml(c.nombre)}')">
-                <span class="pd-cdot" style="background:${escHtml(c.color)}"></span>
-                <span>${escHtml(c.nombre)}</span>
-              </div>`).join('')}
+       ${p.colores.map((c,i)=>`
+  <div class="pd-color-item ${p.colores.length === 1 ? 'selected' : ''}" onclick="selectDetailColor(this,'${escHtml(c.nombre)}')">
+    <span class="pd-cdot" style="background:${escHtml(c.color)}"></span>
+    <span>${escHtml(c.nombre)}</span>
+  </div>`).join('')}
           </div>
         </div>` : ''}
       ${p.material ? `<p class="pd-material"><strong>Material:</strong> ${escHtml(p.material)}</p>` : ''}
@@ -3166,7 +3195,9 @@ function addToCartFromDetail(productId) {
   const hasSizes  = p.tallas && p.tallas.length > 0;
   const hasColors = p.colores && p.colores.length > 0;
 
-  if (hasSizes && !selectedSize) {
+  const esUnico = p.tallas && p.tallas.length === 1 && p.tallas[0] === 'Único';
+  if (esUnico) selectedSize = 'Único';
+  if (hasSizes && !esUnico && !selectedSize) {
     alert('Por favor seleccioná una talla.');
     return;
   }
@@ -3294,7 +3325,7 @@ function renderCartBody() {
             <div class="ci-qty-selector">
               <button class="ci-qty-btn" onclick="changeCartQty(${item.id}, -1)" ${item.cantidad <= 1 ? 'disabled' : ''}>−</button>
               <span class="ci-qty-num">${item.cantidad}</span>
-              <button class="ci-qty-btn" onclick="changeCartQty(${item.id}, 1)">+</button>
+              <button class="ci-qty-btn" onclick="changeCartQty(${item.id}, 1)" ${(() => { const prod = allProducts.find(x => x.id === item.productId); return prod && item.cantidad >= (prod.stock || 0) ? 'disabled' : ''; })()}>+</button>
             </div>
             <div class="ci-price">$${fmtNum(item.precio * item.cantidad)}</div>
           </div>
@@ -3309,12 +3340,18 @@ function renderCartBody() {
 
   lucide.createIcons();
 }
-
 function changeCartQty(itemId, delta) {
   const idx = cart.findIndex(i => i.id === itemId);
   if (idx === -1) return;
-  cart[idx].cantidad += delta;
-  if (cart[idx].cantidad <= 0) {
+  const item = cart[idx];
+  const producto = allProducts.find(x => x.id === item.productId);
+  const stockDisponible = producto ? (producto.stock || 0) : 0;
+  if (delta > 0 && item.cantidad >= stockDisponible) {
+    showToast(`Solo quedan ${stockDisponible} unidades disponibles`);
+    return;
+  }
+  item.cantidad += delta;
+  if (item.cantidad <= 0) {
     cart.splice(idx, 1);
   }
   updateCartBadge();
@@ -3497,7 +3534,46 @@ function openCloudinaryWidget(target) {
   });
   widget.open();
 }
+function addCustomSize(form) {
+  const wrapperId = form === 'create' ? 'custom-sizes-create' : 'custom-sizes-edit';
+  const prefix    = form === 'create' ? 's-custom-' : 'es-custom-';
+  const wrapper   = document.getElementById(wrapperId);
+  if (!wrapper) return;
 
+  // Crear un input inline en vez de prompt
+  if (document.getElementById(prefix + 'input')) return; // ya hay uno abierto
+  const inp = document.createElement('input');
+  inp.type = 'text';
+  inp.id = prefix + 'input';
+  inp.className = 'form-ctrl';
+  inp.placeholder = 'Ej: Extra Grande';
+  inp.style.cssText = 'width:130px;height:34px;font-size:.78rem;padding:0 10px;display:inline-block;vertical-align:middle;';
+
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.textContent = '✓';
+  btn.style.cssText = 'margin-left:4px;padding:4px 10px;border-radius:7px;border:2px solid var(--pk);background:var(--pk-l);font-weight:800;cursor:pointer;vertical-align:middle;';
+
+  const confirm = () => {
+    const val = inp.value.trim();
+    if (!val) { inp.remove(); btn.remove(); return; }
+    const id = prefix + val.toLowerCase().replace(/\s+/g, '-');
+    if (document.getElementById(id)) { inp.remove(); btn.remove(); return; }
+    const cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.className = 'size-cb';
+    cb.id = id; cb.value = val; cb.checked = true;
+    const lbl = document.createElement('label');
+    lbl.className = 'size-lbl'; lbl.htmlFor = id; lbl.textContent = val;
+    inp.remove(); btn.remove();
+    wrapper.appendChild(cb);
+    wrapper.appendChild(lbl);
+  };
+  btn.onclick = confirm;
+  inp.onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); confirm(); } if (e.key === 'Escape') { inp.remove(); btn.remove(); } };
+  wrapper.appendChild(inp);
+  wrapper.appendChild(btn);
+  inp.focus();
+}
 /* ================================================
    CREATE PRODUCT
 ================================================ */
@@ -3594,10 +3670,10 @@ function renderAdminProducts() {
     const isOut     = stock === 0;
     const lowStock  = !isOut && stock < 7;
 
-    return `<div class="aprow">
+    return `<div class="aprow" data-id="${p.id}">
       <div class="aprow-img">
         ${p.imagen
-          ? `<img src="${escHtml(optimizeCloudinaryUrl(p.imagen))}" alt="${escHtml(p.nombre)}" loading="lazy" onerror="this.parentElement.innerHTML='<i data-lucide=\'shirt\'></i>'">`
+          ? `<img src="${escHtml(optimizeCloudinaryUrl(p.imagen))}" alt="${escHtml(p.nombre)}" loading="lazy" onerror="this.parentElement.innerHTML='<i data-lucide=&quot;shirt&quot;></i>'">`
           : '<i data-lucide="shirt"></i>'}
       </div>
       <div class="aprow-info">
@@ -3612,11 +3688,16 @@ function renderAdminProducts() {
         </span>
       </div>
       <div class="aprow-actions">
-        <button class="btn-edit" onclick="openEditModal('${p.id}')">Editar</button>
-        <button class="btn-del" onclick="deleteProduct('${p.id}')">Eliminar</button>
+        <button class="btn-edit" data-action="edit">Editar</button>
+        <button class="btn-del" data-action="del">Eliminar</button>
       </div>
     </div>`;
   }).join('');
+    container.querySelectorAll('.aprow').forEach(row => {
+    const id = row.dataset.id;
+    row.querySelector('[data-action="edit"]').addEventListener('click', () => openEditModal(id));
+    row.querySelector('[data-action="del"]').addEventListener('click', () => deleteProduct(id));
+  });
   lucide.createIcons();
 }
 
@@ -3632,9 +3713,13 @@ function deleteProduct(id) {
    EDIT PRODUCT MODAL
 ================================================ */
 function openEditModal(id) {
-  const p = allProducts.find(x => x.id === id);
-  if (!p) return;
-
+  console.log('openEditModal llamado con id:', id);
+  console.log('allProducts tiene:', allProducts.length, 'productos');
+  console.log('IDs disponibles:', allProducts.map(x => x.id));
+  const p = allProducts.find(x => String(x.id).trim() === String(id).trim());
+  console.log('Producto encontrado:', p);
+  if (!p) { console.error('PRODUCTO NO ENCONTRADO para id:', id); return; }
+  document.getElementById('modal-admin-panel').style.zIndex = '400';
   editColors = p.colores ? [...p.colores] : [];
   editProductImage = p.imagen || '';
 
@@ -3655,25 +3740,48 @@ function openEditModal(id) {
   document.getElementById('edit-img-btn-text').textContent = '📷 Cambiar Imagen';
 
   // Categoría
-  updateEditCategorySelect();
+// Categoría
+  try { updateEditCategorySelect(); } catch(e) { console.error('updateEditCategorySelect falló:', e); }
   setTimeout(() => {
-    const sel = document.getElementById('edit-cat-select');
-    for (let opt of sel.options) { if (opt.value === p.categoria) { opt.selected = true; break; } }
+    try {
+      const sel = document.getElementById('edit-cat-select');
+      if (sel) for (let opt of sel.options) { if (opt.value === p.categoria) { opt.selected = true; break; } }
+    } catch(e) { console.error('select categoría falló:', e); }
   }, 100);
 
-  // Tallas
+// Tallas
+  try {
+   // Primero limpiar tamaños custom previos
+  const customWrap = document.getElementById('custom-sizes-edit');
+  if (customWrap) customWrap.innerHTML = '';
+
+  // Marcar los fijos
   document.querySelectorAll('#edit-sizes-wrap .size-cb').forEach(cb => {
     cb.checked = (p.tallas || []).includes(cb.value);
   });
 
-  renderEditColors();
+  // Recrear los tamaños custom que no están en los fijos
+  const fijos = ['XS','S','M','L','XL','XXL','XXXL','Único','32','34','36','38','40','Pequeño','Mediano','Grande'];
+  (p.tallas || []).forEach(t => {
+    if (!fijos.includes(t)) addCustomSize('edit');
+  });
+  // marcarlos como checked
+  document.querySelectorAll('#edit-sizes-wrap .size-cb').forEach(cb => {
+    cb.checked = (p.tallas || []).includes(cb.value);
+  });
+  } catch(e) { console.error('tallas falló:', e); }
 
+  try { renderEditColors(); } catch(e) { console.error('renderEditColors falló:', e); }
+
+  console.log('Abriendo modal...');
   document.getElementById('modal-edit-product').classList.add('active');
   document.body.style.overflow = 'hidden';
+  console.log('Modal clases:', document.getElementById('modal-edit-product').className);
 }
 
 function closeEditModal() {
   document.getElementById('modal-edit-product').classList.remove('active');
+   document.getElementById('modal-admin-panel').style.zIndex = '500';
   document.body.style.overflow = '';
 }
 
